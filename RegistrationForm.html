@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration Form</title>
+  <style>
+    .box {
+      background-color: white; 
+    }
+    h2 {
+      color: black;
+    }
+    .container {
+      background-color: greenyellow;
+      border-radius: 20px;
+      padding: 20px 100px 20px 10px;
+    }
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .b1 {
+      background-color: skyblue;
+      width: 100px;
+      height: 30px;
+    }
+    .b2 {
+      background-color: red;
+      width: 100px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body class="box">
+  <div class="main">
+    <div class="container">
+      <h2>Student Registration Form</h2>
+      <form id="regForm">
+        
+        <label for="fullname">Full Name:</label><br>
+        <input type="text" id="fullname" name="fullname" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob"><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label><br><br>
+
+        <label for="department">Department:</label><br>
+        <select id="department" name="department">
+          <option value="">--Select--</option>
+          <option value="cse">Computer Science</option>
+          <option value="ece">Electronics</option>
+          <option value="eee">Electrical</option>
+          <option value="mech">Mechanical</option>
+          <option value="civil">Civil</option>
+        </select><br><br>
+
+        <label>Skills:</label><br>
+        <input type="checkbox" id="html" name="skills" value="HTML">
+        <label for="html">HTML</label><br>
+        <input type="checkbox" id="css" name="skills" value="CSS">
+        <label for="css">CSS</label><br>
+        <input type="checkbox" id="js" name="skills" value="JavaScript">
+        <label for="js">JavaScript</label><br>
+        <input type="checkbox" id="react" name="skills" value="React">
+        <label for="react">React</label><br><br>
+
+        <label for="address">Address:</label><br>
+        <textarea id="address" name="address" rows="4" cols="30"></textarea><br><br>
+
+        <label for="photo">Upload Photo:</label><br>
+        <input type="file" id="photo" name="photo"><br><br>
+
+        <button class="b1" type="submit">Register</button>
+        <button class="b2" type="reset">Reset</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("regForm");
+
+    function addStudentDetails(event) {
+      event.preventDefault();
+
+      let name_var = document.getElementById("fullname").value.trim();
+      let email_var = document.getElementById("email").value.trim();
+      let password_var = document.getElementById("password").value.trim();
+      let dob_var = document.getElementById("dob").value.trim();
+      let dept_var = document.getElementById("department").value.trim();
+      let address_var = document.getElementById("address").value.trim();
+
+      let gender_var = document.querySelector('input[name="gender"]:checked');
+      let skill_var = document.querySelectorAll('input[name="skills"]:checked');
+
+      let selectedSkills = [];
+      for (let skill of skill_var) {
+        selectedSkills.push(skill.value);
+      }
+
+      let studentDetails =
+        "STUDENT REGISTRATION DETAILS\n\n" +
+        "Full Name: " + name_var + "\n" +
+        "Email: " + email_var + "\n" +
+        "Password: " + password_var + "\n" + 
+        "Date of Birth: " + dob_var + "\n" +
+        "Gender: " + (gender_var ? gender_var.value : "Not Selected") + "\n" +
+        "Department: " + dept_var + "\n" +
+        "Skills: " + (selectedSkills.length ? selectedSkills.join(", ") : "None") + "\n" +
+        "Address: " + address_var;
+
+      alert(studentDetails);
+    }
+
+    form.addEventListener("submit", addStudentDetails);
+  </script>
+</body>
+</html>
